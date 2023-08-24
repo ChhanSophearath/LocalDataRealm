@@ -96,8 +96,6 @@ class CustomerInForVC: UIViewController, UIPickerViewDelegate,UIPickerViewDataSo
         ageTextField.resignFirstResponder()
     }
     
-    
-    
     private func setupUI(){
         view.addSubview(stackView)
         view.addSubview(tableView)
@@ -125,7 +123,7 @@ class CustomerInForVC: UIViewController, UIPickerViewDelegate,UIPickerViewDataSo
     
     
     //MARK: DidTapped Add Button
-    @objc func didTappedAdd(){
+    @objc private func didTappedAdd(){
         let appentItems = realm.objects(CustomerInforModel.self)
         let id = appentItems[isFromHomeOfIndex ?? 0]._id
         
@@ -213,18 +211,17 @@ extension CustomerInForVC: UITableViewDelegate , UITableViewDataSource{
     }
     
     @objc func didTappedDelete(_ sender: UIButton){
-        //Fect data for bd
-        let listStore = realm.objects(CustomerInforModel.self)
-        let indexToDelete = sender.tag
+        indexPath = sender.tag
+        let customerModel = realm.objects(CustomerInforModel.self)
         
-        if indexToDelete >= 0 && indexToDelete < listStore.count {
+        let idPerson = customerModel[isFromHomeOfIndex ?? 0].person[indexPath]._id
+        if let personToUpdate = realm.object(ofType: PersonModel.self, forPrimaryKey: idPerson ){
             try! realm.write {
-                realm.delete(listStore[indexToDelete])
+                realm.delete(personToUpdate)
                 self.tableView.reloadData()
             }
-        } else {
-            print("Invalid index")
         }
+
     }
     
     @objc func didTappedEdit(_ sender: UIButton){

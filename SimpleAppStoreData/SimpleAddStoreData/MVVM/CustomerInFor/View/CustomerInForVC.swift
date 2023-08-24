@@ -191,10 +191,10 @@ extension CustomerInForVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomerList") as! CustomerList
-
+        
         let appentItems = realm.objects(CustomerInforModel.self)
         let personInfor = appentItems[isFromHomeOfIndex ?? 0].person
-
+        
         cell.lblAge.text =  "Age : " + personInfor[indexPath.row].age
         cell.lblName.text = "Name : " +  personInfor[indexPath.row].name
         cell.lblGender.text = "Gender : " +  personInfor[indexPath.row].gender
@@ -211,30 +211,64 @@ extension CustomerInForVC: UITableViewDelegate , UITableViewDataSource{
     }
     
     @objc func didTappedDelete(_ sender: UIButton){
-        indexPath = sender.tag
-        let customerModel = realm.objects(CustomerInforModel.self)
         
-        let idPerson = customerModel[isFromHomeOfIndex ?? 0].person[indexPath]._id
-        if let personToUpdate = realm.object(ofType: PersonModel.self, forPrimaryKey: idPerson ){
-            try! realm.write {
-                realm.delete(personToUpdate)
-                self.tableView.reloadData()
+        indexPath = sender.tag
+        
+    
+        let alertController = UIAlertController(title: "Massage", message: "Do you want to delete it?", preferredStyle: .alert)
+        
+        // Add a "Yes" button
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { [self] _ in
+            let customerModel = realm.objects(CustomerInforModel.self)
+            let idPerson = customerModel[isFromHomeOfIndex ?? 0].person[indexPath]._id
+            if let personToUpdate = realm.object(ofType: PersonModel.self, forPrimaryKey: idPerson ){
+                try! realm.write {
+                    realm.delete(personToUpdate)
+                    self.tableView.reloadData()
+                }
             }
         }
-
+        alertController.addAction(yesAction)
+        
+        // Add a "No" button
+        let noAction = UIAlertAction(title: "No", style: .cancel) { _ in
+            // Handle "No" button tap
+            print("User tapped No")
+        }
+        alertController.addAction(noAction)
+        // Present the alert controller
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc func didTappedEdit(_ sender: UIButton){
-        indexPath = sender.tag
-        let customerModel = realm.objects(CustomerInforModel.self)
         
-        let idPerson = customerModel[isFromHomeOfIndex ?? 0].person[indexPath]._id
-        if let personToUpdate = realm.object(ofType: PersonModel.self, forPrimaryKey: idPerson ){
-            nameTextField.text = personToUpdate.name
-            ageTextField.text = personToUpdate.age
-            genderTextField.text = personToUpdate.gender
-            isTappedEdit = true
+        indexPath = sender.tag
+        
+        
+        let alertController = UIAlertController(title: "Massage", message: "Do you want to edit it?", preferredStyle: .alert)
+        
+        // Add a "Yes" button
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { [self] _ in
+            let customerModel = realm.objects(CustomerInforModel.self)
+            
+            let idPerson = customerModel[isFromHomeOfIndex ?? 0].person[indexPath]._id
+            if let personToUpdate = realm.object(ofType: PersonModel.self, forPrimaryKey: idPerson ){
+                nameTextField.text = personToUpdate.name
+                ageTextField.text = personToUpdate.age
+                genderTextField.text = personToUpdate.gender
+                isTappedEdit = true
+            }
         }
+        alertController.addAction(yesAction)
+        
+        // Add a "No" button
+        let noAction = UIAlertAction(title: "No", style: .cancel) { _ in
+            // Handle "No" button tap
+            print("User tapped No")
+        }
+        alertController.addAction(noAction)
+        // Present the alert controller
+        present(alertController, animated: true, completion: nil)
     }
 }
 

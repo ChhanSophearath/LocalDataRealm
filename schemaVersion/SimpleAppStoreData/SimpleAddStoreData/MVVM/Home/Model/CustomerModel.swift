@@ -25,7 +25,7 @@ class PersonModel: Object {
     @Persisted(originProperty: "person") var assignee: LinkingObjects<CustomerInforModel>
     // need the same "person"
     @Persisted var ponumber: String? = "000000000000000"// New field: Purchase Order Number
-    
+    @Persisted var nextName: String? = "&kkk09"
 //    static func migratePersonModel(_ migration: Migration, oldSchemaVersion: UInt64) {
 //           if oldSchemaVersion < 2 {
 //               // Add the 'ponumber' property to the PersonModel class

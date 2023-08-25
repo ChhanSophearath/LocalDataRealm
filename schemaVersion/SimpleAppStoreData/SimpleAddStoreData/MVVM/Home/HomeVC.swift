@@ -14,10 +14,10 @@ class HomeVC: UIViewController {
     var firstTime: Bool?
     
     
-   var realm: Realm!
+    var realm: Realm!
     var list = CustomerInforModel()
     //    var personList = PersonModelList()
-
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -62,66 +62,79 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
-//        let listStore = realm.objects(CustomerInforModel.self)
+        //        let listStore = realm.objects(CustomerInforModel.self)
         //        let userDefaults = UserDefaults.standard
         
         //        let task = realm.objects(Task.self)
         
-//        if firstTime == true{
-//
-//            try! realm.write {
-//
-//                //                list.tasks.append(objectsIn: task)
-//                realm.add(list)
-//                self.collectionView.reloadData()
-//            }
-//
-//        }else{
-//            print("First time home sceen ")
-//        }
+        //        if firstTime == true{
+        //
+        //            try! realm.write {
+        //
+        //                //                list.tasks.append(objectsIn: task)
+        //                realm.add(list)
+        //                self.collectionView.reloadData()
+        //            }
+        //
+        //        }else{
+        //            print("First time home sceen ")
+        //        }
+        
+       
         
         
         let config = Realm.Configuration(
-            schemaVersion: 2, // Increment this value whenever schema changes
+            schemaVersion: 3, // Increment this value whenever schema changes
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 2 {
+                if oldSchemaVersion < 3 {
                     // Enumerate through objects of the Person class
                     migration.enumerateObjects(ofType: PersonModel.className()) { oldObject, newObject in
-                        // Set a default value for the age property
-                        newObject!["ponumber"] = ""
+                        // Set a default value for the ponumber @property
+                        newObject!["dd"] = ""
                     }
                 }
             }
         )
         
         do {
-             realm = try Realm(configuration: config)
+            realm = try Realm(configuration: config)
             
             // Perform Realm operations, such as adding, querying, and updating objects
-            try realm.write {
-                let newPerson = PersonModel()
-//                newPerson.name = "John"
-//                newPerson.age = 25
-//                newPerson.ponumber = "000000000000"
-//                realm.add(newPerson)
-                realm.add(list)
-                self.collectionView.reloadData()
-            }
+
+                //                let newPerson = PersonModel()
+                //                newPerson.name = "John"
+                //                newPerson.age = 25
+                //                newPerson.ponumber = "000000000000"
+                //                realm.add(newPerson)
+                if firstTime == true{
+                    
+                    try! realm.write {
+                        
+                        //                list.tasks.append(objectsIn: task)
+                        realm.add(list)
+                        self.collectionView.reloadData()
+                    }
+                    
+                }else{
+                    print("First time home sceen ")
+                }
             
-            let persons = realm.objects(PersonModel.self)
-            for person in persons {
-                print("Name: \(person.name), Age: \(person.age)")
-            }
+            
+//            let persons = realm.objects(PersonModel.self)
+//            for person in persons {
+//                print("Name: \(person.name), Age: \(person.age)")
+//            }
         } catch let error as NSError {
             print("Error: \(error.localizedDescription)")
         }
         
+//        let listStore = realm.objects(CustomerInforModel.self)
 //        if listStore.isEmpty {
 //            lblList.text = "Empty list!"
 //        }else{
 //            lblList.text = ""
 //        }
-//
+        
         print("filePathRealmSwift: \(Realm.Configuration.defaultConfiguration.fileURL!)")
     }
     
@@ -174,8 +187,6 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate,U
         cell.titleLabel.text = listStore[indexPath.row].roomName
         cell.backgroundColor = .orange
         cell.layer.cornerRadius = 10
-        
-        //        listStore.
         return cell
     }
     
@@ -189,7 +200,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate,U
         let vc = CustomerInForVC()
         vc.isFromHomeOfIndex = indexPath.row
         self.navigationController?.pushViewController(vc, animated: true)
-
+        
     }
 }
 

@@ -84,14 +84,17 @@ class HomeVC: UIViewController {
         
         
         let config = Realm.Configuration(
-            schemaVersion: 3, // Increment this value whenever schema changes
+            schemaVersion: 4, // Increment this value whenever schema changes
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 3 {
+                if oldSchemaVersion < 4 {
                     // Enumerate through objects of the Person class
-                    migration.enumerateObjects(ofType: PersonModel.className()) { oldObject, newObject in
+                    //
+                    migration.enumerateObjects(ofType: CustomerInforModel.className()) { oldObject, newObject in
                         // Set a default value for the ponumber @property
-                        newObject!["dd"] = ""
+                        newObject!["floor"] = "Phnom penh"
+
                     }
+//                    migration.renameProperty(onType: PersonModel.className(), from: "name", to: "fullName")
                 }
             }
         )
@@ -119,21 +122,16 @@ class HomeVC: UIViewController {
                     print("First time home sceen ")
                 }
             
-            
-//            let persons = realm.objects(PersonModel.self)
-//            for person in persons {
-//                print("Name: \(person.name), Age: \(person.age)")
-//            }
         } catch let error as NSError {
             print("Error: \(error.localizedDescription)")
         }
         
-//        let listStore = realm.objects(CustomerInforModel.self)
-//        if listStore.isEmpty {
-//            lblList.text = "Empty list!"
-//        }else{
-//            lblList.text = ""
-//        }
+        let listStore = realm.objects(CustomerInforModel.self)
+        if listStore.isEmpty {
+            lblList.text = "Empty list!"
+        }else{
+            lblList.text = ""
+        }
         
         print("filePathRealmSwift: \(Realm.Configuration.defaultConfiguration.fileURL!)")
     }

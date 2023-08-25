@@ -149,7 +149,7 @@ class CustomerInForVC: UIViewController, UIPickerViewDelegate,UIPickerViewDataSo
             let newTask = PersonModel()
             newTask.age = String(age)
             newTask.gender = gender
-            newTask.name = name
+            newTask.fullName = name
             
             
             if isTappedEdit == true{
@@ -159,7 +159,7 @@ class CustomerInForVC: UIViewController, UIPickerViewDelegate,UIPickerViewDataSo
                 let idPerson = customerModel[isFromHomeOfIndex ?? 0].person[indexPath]._id
                 if let personToUpdate = realm.object(ofType: PersonModel.self, forPrimaryKey: idPerson ){
                     try! realm.write {
-                        personToUpdate.name = name
+                        personToUpdate.fullName = name
                         personToUpdate.age = String(age)
                         personToUpdate.gender = gender
                     }
@@ -196,7 +196,7 @@ extension CustomerInForVC: UITableViewDelegate , UITableViewDataSource{
         let personInfor = appentItems[isFromHomeOfIndex ?? 0].person
         
         cell.lblAge.text =  "Age : " + personInfor[indexPath.row].age
-        cell.lblName.text = "Name : " +  personInfor[indexPath.row].name
+        cell.lblName.text = "Name : " +  personInfor[indexPath.row].fullName
         cell.lblGender.text = "Gender : " +  personInfor[indexPath.row].gender
         
         cell.btnDelete.tag = indexPath.row
@@ -253,7 +253,7 @@ extension CustomerInForVC: UITableViewDelegate , UITableViewDataSource{
             
             let idPerson = customerModel[isFromHomeOfIndex ?? 0].person[indexPath]._id
             if let personToUpdate = realm.object(ofType: PersonModel.self, forPrimaryKey: idPerson ){
-                nameTextField.text = personToUpdate.name
+                nameTextField.text = personToUpdate.fullName
                 ageTextField.text = personToUpdate.age
                 genderTextField.text = personToUpdate.gender
                 isTappedEdit = true

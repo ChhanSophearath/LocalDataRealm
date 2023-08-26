@@ -21,18 +21,18 @@ class CreateRoomVCViewController: UIViewController,UITextFieldDelegate {
         return textField
     }()
     
-    
     lazy var btnSave: MainButton = {
         let btn = MainButton(type: .system)
         btn.setTitle("Save", for: .normal)
         btn.addTarget(self, action: #selector(didTappedSave), for: .touchUpInside)
         return btn
-        
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Create Room"
         view.backgroundColor = .white
+        title = "Create Room"
+       
         setupUI()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -65,14 +65,10 @@ class CreateRoomVCViewController: UIViewController,UITextFieldDelegate {
     
     @objc func didTappedSave(_ sander: UIButton){
         
-        
         if roomTextField.text == ""{
             showAlert(title: "Error", message: "Please input your room name")
-            
         }else{
-            
-            let listStore = realm.objects(CustomerInforModel.self)
-            let createRoomName = roomTextField.text ?? ""
+             let createRoomName = roomTextField.text ?? ""
             let userDefaults = UserDefaults.standard
             let vc = HomeVC()
             vc.firstTime = true
@@ -80,35 +76,22 @@ class CreateRoomVCViewController: UIViewController,UITextFieldDelegate {
                 
                 vc.list.roomName = createRoomName
                 userDefaults.set(true, forKey: "isFirstTime")
-              
-                
+ 
             } else {
-
                 vc.list.roomName = createRoomName
-//                for getListStore in listStore{
-//                    if getListStore.roomName == createRoomName{
-//                        showAlert(title: "Error", message: "Already named")
-//                    }else{
-//                        if createRoomName.isEmpty{
-//                            showAlert(title: "Error", message: "Invalid name.")
-//                        }else{
-//
-//
-//                        }
-//                    }
-//                }
-                
             }
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
 
+
+//MARK: Keyborad hide and show
 extension CreateRoomVCViewController{
     // When keyboard is hidden
     @objc func keyboardWillHide(notification: NSNotification) {
         bottomConstraint.isActive = false
-        bottomConstraint = btnSave.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        bottomConstraint.constant = 0
         bottomConstraint.isActive = true
     }
     
@@ -118,7 +101,7 @@ extension CreateRoomVCViewController{
             let heightKeyboard =  -keyboardSize.size.height + 30
             
             bottomConstraint.isActive = false
-            bottomConstraint = btnSave.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: heightKeyboard)
+            bottomConstraint.constant =  heightKeyboard
             bottomConstraint.isActive = true
         }
     }

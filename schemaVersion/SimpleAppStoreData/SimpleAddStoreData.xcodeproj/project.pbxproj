@@ -24,6 +24,7 @@
 		1930E87E2A935384002DBB6A /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1930E87D2A935384002DBB6A /* CustomerModel.swift */; };
 		1930E8822A935ABC002DBB6A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1930E8812A935ABC002DBB6A /* Realm */; };
 		1930E8842A935ABC002DBB6A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1930E8832A935ABC002DBB6A /* RealmSwift */; };
+		199FAAD62A99AACB005FC20E /* FammilyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199FAAD52A99AACB005FC20E /* FammilyVC.swift */; };
 		FC35C56F05F0DCA5B5DD1BE7 /* Pods_SimpleAddStoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DABAA4C6D9F1DFBCD74BC2D /* Pods_SimpleAddStoreData.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		1930E8762A8F7FF7002DBB6A /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		1930E87A2A8F8453002DBB6A /* CustomerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerList.swift; sourceTree = "<group>"; };
 		1930E87D2A935384002DBB6A /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
+		199FAAD52A99AACB005FC20E /* FammilyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FammilyVC.swift; sourceTree = "<group>"; };
 		5DABAA4C6D9F1DFBCD74BC2D /* Pods_SimpleAddStoreData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleAddStoreData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F4A5B39EB884F2F47D48F36 /* Pods-SimpleAddStoreData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAddStoreData.release.xcconfig"; path = "Target Support Files/Pods-SimpleAddStoreData/Pods-SimpleAddStoreData.release.xcconfig"; sourceTree = "<group>"; };
 		ADC74CDEF5E2F175919245AA /* Pods-SimpleAddStoreData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAddStoreData.debug.xcconfig"; path = "Target Support Files/Pods-SimpleAddStoreData/Pods-SimpleAddStoreData.debug.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				1930E86F2A8F72B0002DBB6A /* CreateRoom */,
 				1930E8662A8F6329002DBB6A /* Home */,
 				1930E8622A8F50D6002DBB6A /* Welcome */,
+				199FAAD52A99AACB005FC20E /* FammilyVC.swift */,
 			);
 			path = MVVM;
 			sourceTree = "<group>";
@@ -300,7 +303,7 @@
 			);
 			mainGroup = 1930E83D2A8F4F2A002DBB6A;
 			packageReferences = (
-				1930E8802A935ABC002DBB6A /* XCRemoteSwiftPackageReference "realm-swift.git" */,
+				1930E8802A935ABC002DBB6A /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 1930E8472A8F4F2B002DBB6A /* Products */;
 			projectDirPath = "";
@@ -356,6 +359,7 @@
 			files = (
 				1930E8722A8F73E9002DBB6A /* CreateRoomVCViewController.swift in Sources */,
 				1930E87E2A935384002DBB6A /* CustomerModel.swift in Sources */,
+				199FAAD62A99AACB005FC20E /* FammilyVC.swift in Sources */,
 				1930E8772A8F7FF7002DBB6A /* Customer.swift in Sources */,
 				1930E8742A8F7A18002DBB6A /* CustomerInForVC.swift in Sources */,
 				1930E84E2A8F4F2B002DBB6A /* WelcomViewController.swift in Sources */,
@@ -589,7 +593,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1930E8802A935ABC002DBB6A /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
+		1930E8802A935ABC002DBB6A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -602,12 +606,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1930E8812A935ABC002DBB6A /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1930E8802A935ABC002DBB6A /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 1930E8802A935ABC002DBB6A /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		1930E8832A935ABC002DBB6A /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1930E8802A935ABC002DBB6A /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 1930E8802A935ABC002DBB6A /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
